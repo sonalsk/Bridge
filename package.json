@@ -1,0 +1,17 @@
+{
+  "name": "MS-Teams",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sonalsk/MS-Teams.git",
+  "author": "sonalsk <sonalkushwaha039@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "socket.io": "^4.1.2"
+  },
+  "scripts": {
+    "start": "PROD=true node server.js",
+    "postinstall": "cd ./client && yarn"
+  }
+}
