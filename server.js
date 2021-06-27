@@ -14,6 +14,7 @@ const server = http.createServer(app);
 const socket = require("socket.io");
 // instance of io by taking the existing server
 const io = socket(server);
+const path = require("path");
 
 
 /* ------ CREATING AND JOINING ROOMS FOR CONNECTION BETWEEN USERS ------ */
