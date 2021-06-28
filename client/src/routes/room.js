@@ -158,6 +158,12 @@ const Room = (props) => {
         partnerVideo.current.srcObject = e.streams[0];
     };
 
+    function hangUp() {
+        localStream.getVideoTracks()[0].enabled = false;
+        localStream.getAudioTracks()[0].enabled = false;
+        window.location.replace("/");
+    }
+
     return (
         <div>            
             <div id = "video-box">
@@ -167,6 +173,7 @@ const Room = (props) => {
             
             <div>
                 <button onClick = {toggleVideo}> Video </button>
+                <button onClick = {hangUp}> End </button>
                 <button onClick = {toggleAudio}> Audio </button>
             </div>
         </div>
