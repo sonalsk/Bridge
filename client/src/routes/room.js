@@ -1,8 +1,7 @@
 /* ------ IMPORTING FILES ------- */
 
-// importing react
+import '../css/room.css'
 import React, { useRef, useEffect } from "react";
-// importing io from socket.io
 import io from "socket.io-client";
 
 const Room = (props) => {
@@ -13,13 +12,17 @@ const Room = (props) => {
     const otherUser = useRef();
     const userStream = useRef();
 
+    var localStream;
+
     useEffect(() => {
-        // asikng for audio and video access
+        // asking for audio and video access
+
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
             // streaming the audio and video
             userVideo.current.srcObject = stream;
             userStream.current = stream;
-
+            localStream = stream;
+            
             // grabbing the room id from the url and then sending it to the socket io server
             socketRef.current = io.connect("/");
             socketRef.current.emit("join room", props.match.params.roomID);
@@ -45,6 +48,20 @@ const Room = (props) => {
         });
 
     }, []);
+
+    // Toggle Video
+    let isVideo = true;
+    function toggleVideo() {
+        isVideo = !isVideo;
+        localStream.getVideoTracks()[0].enabled = isVideo;
+    }
+
+    // Toggle Audio
+    let isAudio = true;
+    function toggleAudio() {
+        isAudio = !isAudio;
+        localStream.getAudioTracks()[0].enabled = isAudio;
+    }
     
     // calling user
     function callUser(userID) {
@@ -142,10 +159,18 @@ const Room = (props) => {
     };
 
     return (
-        <div>
-            <video autoPlay ref = {userVideo} />
-            <video autoPlay ref = {partnerVideo} />
+        <div>            
+            <div id = "video-box">
+                <video autoPlay ref = {userVideo} />
+                <video autoPlay ref = {partnerVideo} />
+            </div>
+            
+            <div>
+                <button onClick = {toggleVideo}> Video </button>
+                <button onClick = {toggleAudio}> Audio </button>
+            </div>
         </div>
+        
     );
 };
 

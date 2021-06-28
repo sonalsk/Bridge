@@ -18,9 +18,12 @@ const CreateRoom = (props) => {
         props.history.push(`/room/${id}`);
     }
 
-
     return (
+        <div>
+        <h1>One on One</h1>
         <button onClick = {create}> Create Room </button>
+        </div>
+        
     );
 }
 
