@@ -21,6 +21,7 @@ const CreateRoom = (props) => {
     return (
         <div>
         <h1>One on One</h1>
+        <button> Schedule </button>
         <button onClick = {create}> Create Room </button>
         </div>
         
