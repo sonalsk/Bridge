@@ -1,0 +1,38 @@
+#oo-lp {
+    margin-top: 10rem;
+}
+.welcomeCR {
+    margin-top: 2rem;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    color: #132540;
+    font-size: 1.5rem;
+}
+.welcomeCR h1 {
+    font-weight: 700;
+    font-size: 3rem;
+}
+.welcomeCR p {
+    margin-top: 2rem;
+}
+.schedule {
+    color: #f6f6f6;
+    background-color: #302b70;
+    border: none;
+    font-size: large;
+    padding: 2%;
+    border-radius: 8px;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+.schedule:hover {
+    color: #f6f6f6;
+    background-color: #787cd1;
+    border: none;
+}
+.about-img-cr {
+    padding-left: 10rem;
+    height: 30rem;
+    position: relative;
+    float: left;
+}

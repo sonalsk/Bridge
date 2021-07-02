@@ -16,6 +16,9 @@
     font-weight: 700;
     font-size: 4.5rem;
 }
+.welcome p {
+    margin-top: 2rem;
+}
 .homeButton {
     color: #f6f6f6;
     background-color: #302b70;
