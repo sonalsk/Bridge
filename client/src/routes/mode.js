@@ -37,7 +37,7 @@ function Mode() {
                         <div class="col-12 col-md-4">
                             <Card className='customCard'>
                                 <Card.Img id='customCardImg' variant="top" src={one} />
-                                <Card.Body>
+                                <Card.Body id='customCardText'>
                                     <Card.Title>One on One Call</Card.Title>
                                     {/* <Button href='/CreateRoom' class="homeButton">Get Started</Button> */}
                                     <button class="choiceButton" onClick={() => window.location.replace("/CreateRoom")}>
@@ -50,7 +50,7 @@ function Mode() {
                         <div class="col-12 col-md-4">
                         <Card className='customCard'>
                                 <Card.Img id='customCardImg' variant="top" src={group} />
-                                <Card.Body>
+                                <Card.Body id='customCardText'>
                                     <Card.Title>Group Call</Card.Title>
                                     <button class="choiceButton">
                                         Get Started
@@ -62,7 +62,7 @@ function Mode() {
                         <div class="col-12 col-md-4">
                         <Card className='customCard'>
                                 <Card.Img id='customCardImg' variant="top" src={broadcast} />
-                                <Card.Body>
+                                <Card.Body id='customCardText'>
                                     <Card.Title>Broadcast</Card.Title>
                                     <button class="choiceButton">
                                         Get Started

@@ -5,14 +5,16 @@
 
 /* landinh page */
 .welcome {
+    margin-top: 2rem;
     text-align: left;
-    padding-left: 12rem;
+    padding-left: 20%;
     font-family: 'Montserrat', sans-serif;
     color: #132540;
+    font-size: 1.5rem;
 }
 .welcome h1 {
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 4.5rem;
 }
 .homeButton {
     color: #f6f6f6;
@@ -21,6 +23,7 @@
     font-size: large;
     padding: 3%;
     border-radius: 8px;
+    margin-top: 1rem;
 }
 .homeButton:hover {
     color: #f6f6f6;
@@ -28,23 +31,22 @@
     border: none;
 }
 .about-img {
-    height: 30rem;
+    height: 40rem;
     position: relative;
     float: right;
 }
 
 /* modes */
 .modeChoice {
-    margin-top: 3rem;
+    margin-top: 8rem;
     text-align: left;
-    padding-left: 8rem;
     font-family: 'Montserrat', sans-serif;
     color: #132540;
-    
+    font-size: 1.5rem;
 }
 .modeChoice h1 {
-    font-weight: 600;
-    font-size: 3rem;
+    font-weight: 700;
+    font-size: 4rem;
 }
 .customCard {
     margin-top: 2rem;
@@ -52,13 +54,16 @@
     border-radius: 20px;
     color: #f2f3f6;
     padding-top: 1rem;
-    width: 14rem;
-    height: 18rem;
+    width: 20rem;
+    height: 20rem;
 }
 #customCardImg{
     height: 10rem;
     width: 12rem;
     align-self: center;
+}
+#customCardText {
+    text-align: center;
 }
 .choiceButton {
     color: #302b70;
