@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+.end {
+    height: 15rem;
+}
+
+/* landinh page */
+.welcome {
+    text-align: left;
+    padding-left: 12rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #132540;
+}
+.welcome h1 {
+    font-weight: 700;
+    font-size: 3rem;
+}
+.homeButton {
+    color: #f6f6f6;
+    background-color: #302b70;
+    border: none;
+    font-size: large;
+    padding: 3%;
+    border-radius: 8px;
+}
+.homeButton:hover {
+    color: #f6f6f6;
+    background-color: #787cd1;
+    border: none;
+}
+.about-img {
+    height: 30rem;
+    position: relative;
+    float: right;
+}
+
+/* modes */
+.modeChoice {
+    margin-top: 3rem;
+    text-align: left;
+    padding-left: 8rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #132540;
+    
+}
+.modeChoice h1 {
+    font-weight: 600;
+    font-size: 3rem;
+}
+.customCard {
+    margin-top: 2rem;
+    background-color: rgb(62, 56, 148, 0.8);
+    border-radius: 20px;
+    color: #f2f3f6;
+    padding-top: 1rem;
+    width: 14rem;
+    height: 18rem;
+}
+#customCardImg{
+    height: 10rem;
+    width: 12rem;
+    align-self: center;
+}
+.choiceButton {
+    color: #302b70;
+    background-color: #f0f2f6;
+    border: none;
+    padding: 3%;
+    border-radius: 8px;
+}
+.choiceButton:hover {
+    color: #f6f6f6;
+    background-color: #787cd1;
+    border: none;
+}
