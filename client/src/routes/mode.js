@@ -31,7 +31,7 @@ function Mode() {
 
             {/* Choices */}
             <section id="choice">
-                <div className="modeChoice container">
+                <div className="modeChoice">
                     <h1>Make a Call!</h1>
                     <p>Connect with your peers in three different ways!</p>
 

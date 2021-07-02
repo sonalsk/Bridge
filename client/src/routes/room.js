@@ -172,14 +172,28 @@ const Room = (props) => {
 
     // Toggle Video
     let isVideo = true;
+    let colorVideo = '#bc1823';
     function toggleVideo() {
+        document.getElementById('avv').style.backgroundColor = colorVideo;
+        if (isVideo) {
+            colorVideo = '#302b70';
+        } else {
+            colorVideo = '#bc1823';
+        }
         isVideo = !isVideo;
         localStream.getVideoTracks()[0].enabled = isVideo;
     }
 
     // Toggle Audio
     let isAudio = true;
+    let colorAudio = '#bc1823';
     function toggleAudio() {
+        document.getElementById('av').style.backgroundColor = colorAudio;
+        if (isAudio) {
+            colorAudio = '#302b70';
+        } else {
+            colorAudio = '#bc1823';
+        }
         isAudio = !isAudio;
         localStream.getAudioTracks()[0].enabled = isAudio;
     }
@@ -198,10 +212,10 @@ const Room = (props) => {
                 <video autoPlay ref = {partnerVideo} />
             </div>
             
-            <div>
-                <button onClick = {toggleVideo}> Video </button>
-                <button onClick = {hangUp}> End </button>
-                <button onClick = {toggleAudio}> Audio </button>
+            <div id ="button-box">
+                <button id="av" onClick = {toggleAudio}> <i class="fas fa-microphone-slash"></i> </button>
+                <button id="end" onClick = {hangUp}> <i class="fas fa-phone-square-alt fa-3x"></i> </button>
+                <button id="avv" onClick = {toggleVideo}> <i class="fas fa-video"></i> </button>
             </div>
         </div>
         

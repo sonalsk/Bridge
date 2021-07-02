@@ -7,7 +7,7 @@
 .welcome {
     margin-top: 2rem;
     text-align: left;
-    padding-left: 20%;
+    padding-left: 18%;
     font-family: 'Montserrat', sans-serif;
     color: #132540;
     font-size: 1.5rem;
@@ -36,7 +36,8 @@
 .about-img {
     height: 40rem;
     position: relative;
-    float: right;
+    padding-left: 5rem;
+    padding-top: 5rem;
 }
 
 /* modes */
@@ -46,6 +47,8 @@
     font-family: 'Montserrat', sans-serif;
     color: #132540;
     font-size: 1.5rem;
+    padding-left: 18%;
+    padding-right: 8%;
 }
 .modeChoice h1 {
     font-weight: 700;
