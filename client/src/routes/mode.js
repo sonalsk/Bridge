@@ -19,7 +19,7 @@ function Mode() {
                 <div class="row">
                     <div class="col-md-6 align-self-center welcome">
                         <h1>Welcome to </h1>
-                        <h1>Bridge!</h1>
+                        <h1>Bridge.</h1>
                         <p>A simple and elegant way to connect with your peers!</p>
                         <button class="homeButton" onClick={() => window.location.replace("/#choice")}>Get Started </button>
                     </div>
