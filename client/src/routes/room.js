@@ -1,24 +1,25 @@
 /* ------ IMPORTING FILES ------- */
-
 import '../css/room.css'
 import React, { useRef, useEffect } from "react";
 import io from "socket.io-client";
 
 const Room = (props) => {
+
+    // variables for different functionalities of video call
     const userVideo = useRef();
     const partnerVideo = useRef();
     const peerRef = useRef();
     const socketRef = useRef();
     const otherUser = useRef();
     const userStream = useRef();
-
     var localStream;
 
     useEffect(() => {
         // asking for audio and video access
-
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
+            
             // streaming the audio and video
+            // storing the local stream
             userVideo.current.srcObject = stream;
             userStream.current = stream;
             localStream = stream;
@@ -40,40 +41,29 @@ const Room = (props) => {
 
             // calling the function when made an offer
             socketRef.current.on("offer", handleRecieveCall);
-            // sending the answer back
+            // sending the answer back to socket
             socketRef.current.on("answer", handleAnswer);
-            // joining the user
+            // joining the user after receiving
             socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
 
         });
 
     }, []);
-
-    // Toggle Video
-    let isVideo = true;
-    function toggleVideo() {
-        isVideo = !isVideo;
-        localStream.getVideoTracks()[0].enabled = isVideo;
-    }
-
-    // Toggle Audio
-    let isAudio = true;
-    function toggleAudio() {
-        isAudio = !isAudio;
-        localStream.getAudioTracks()[0].enabled = isAudio;
-    }
     
-    // calling user
+    // calling user a ( who created the room )
     function callUser(userID) {
-        // taking peer ID
+        // taking the peer ID
         peerRef.current = createPeer(userID);
-        // streaming the user stream
+        // streaming the user a stream
+        // giving access to our peer of our individual stream
         userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
     }
 
-    //user id of the person we are tyring to call - recieving the offer
+    // user id of the person we are trying to call ( user b )
+    // user b recieving the offer
     function createPeer(userID) {
         const peer = new RTCPeerConnection({
+            // connecting the two servers
             iceServers: [
                 {
                     urls: "stun:stun.stunprotocol.org"
@@ -93,12 +83,18 @@ const Room = (props) => {
         return peer;
     }
 
+    // ------ CREATING THE PEER TO PEER CONNECTION --------
+
     // making the call
+    // when the actual offer is created, it is then sent to the other user
     function handleNegotiationNeededEvent(userID) {
         peerRef.current.createOffer().then(offer => {
+            
             // setting the local description from the users offer
             return peerRef.current.setLocalDescription(offer);
         }).then(() => {
+            
+            // the person we are trying to make the offer to
             const payload = {
                 target: userID,
                 caller: socketRef.current.id,
@@ -108,21 +104,28 @@ const Room = (props) => {
         }).catch(e => console.log(e));
     }
 
+
     // recieving the call
     function handleRecieveCall(incoming) {
         peerRef.current = createPeer();
+        
         // remote description
         const desc = new RTCSessionDescription(incoming.sdp);
-        // setting remote description
+        
+        // setting remote description and attaching the stream
         peerRef.current.setRemoteDescription(desc).then(() => {
             userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
         }).then(() => {
+        
             // creating the answer
             return peerRef.current.createAnswer();
         }).then(answer => {
+        
             // setting local description
             return peerRef.current.setLocalDescription(answer);
         }).then(() => {
+
+            // sending data back to the caller
             const payload = {
                 target: incoming.caller,
                 caller: socketRef.current.id,
@@ -132,15 +135,22 @@ const Room = (props) => {
         })
     }
 
+
+    // function to handle the answer which the user a (who created the call) is receiving
     function handleAnswer(message) {
         const desc = new RTCSessionDescription(message.sdp);
         peerRef.current.setRemoteDescription(desc).catch(e => console.log(e));
     }
 
-    // handling the events
+    // ------ END OF THE PEER TO PEER CONNECTION --------
+
+
+    // handling the ice candidates
     function handleICECandidateEvent(e) {
         if (e.candidate) {
             const payload = {
+
+                // target can be user a or user b
                 target: otherUser.current,
                 candidate: e.candidate,
             }
@@ -148,16 +158,33 @@ const Room = (props) => {
         }
     }
 
+    // swapping candidates until they reach on an agreement
     function handleNewICECandidateMsg(incoming) {
         const candidate = new RTCIceCandidate(incoming);
-
         peerRef.current.addIceCandidate(candidate).catch(e => console.log(e));
     }
     
+    // receiving the remote stream of peer
+    // attaching the video of partner
     function handleTrackEvent(e) {
         partnerVideo.current.srcObject = e.streams[0];
     };
 
+    // Toggle Video
+    let isVideo = true;
+    function toggleVideo() {
+        isVideo = !isVideo;
+        localStream.getVideoTracks()[0].enabled = isVideo;
+    }
+
+    // Toggle Audio
+    let isAudio = true;
+    function toggleAudio() {
+        isAudio = !isAudio;
+        localStream.getAudioTracks()[0].enabled = isAudio;
+    }
+
+    // Hanging up the call
     function hangUp() {
         localStream.getVideoTracks()[0].enabled = false;
         localStream.getAudioTracks()[0].enabled = false;

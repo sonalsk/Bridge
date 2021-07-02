@@ -7,12 +7,14 @@ import one from '../assets/one.png'
 import group from '../assets/group.png'
 import broadcast from '../assets/broadcast.png'
 
+// Function to provide the user with 3 different choices
+// one on one call, group call and broadcast
+
 function Mode() {
     return (
 
         <div class="landing-page">
-
-            {/* Welcome */}
+            {/* Welcome Page */}
             <section>
                 <div class="row">
                     <div class="col-md-6 align-self-center welcome">
@@ -27,7 +29,7 @@ function Mode() {
                 </div>
             </section>
 
-            {/* Choice */}
+            {/* Choices */}
             <section id="choice">
                 <div className="modeChoice container">
                     <h1>Make a Call!</h1>

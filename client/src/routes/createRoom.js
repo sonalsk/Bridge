@@ -1,6 +1,4 @@
 /* ------ IMPORTING FILES ------- */
-
-// importing react
 import React from "react";
 // importing uuid to create and have unique ID for each room
 import { v1 as uuid } from "uuid";
@@ -11,10 +9,11 @@ import { v1 as uuid } from "uuid";
 const CreateRoom = (props) => {
     function create() {
         
-        // create the room id
+        // creating the room id
         const id = uuid();
         
         // use the unique room id in the url
+        // to redirect the user to the correct page
         props.history.push(`/room/${id}`);
     }
 

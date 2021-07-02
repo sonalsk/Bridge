@@ -1,11 +1,12 @@
+/* ------ IMPORTING FILES ------- */
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import CreateRoom from './createRoom';
-import Room from './room';
+
+// Function to redirect the user
+// to the on one on video call functions
 
 function oneOnone() {
-
   return (
     <div className="oneOnone">
       <BrowserRouter>
