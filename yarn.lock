@@ -228,6 +228,11 @@ ee-first@1.1.1:
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
+emailjs-com@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/emailjs-com/-/emailjs-com-3.1.0.tgz#442927269bf04f366ca30d67b4272f55961979da"
+  integrity sha512-e6rs1F2wTl4vrsTXNNCUPK5cFfuPXYcKJlZgPtsThOidIp5dbgNS5SUrpnP3qxt9p5Om0lkFCVkmBi1a6hQFnw==
+
 encodeurl@~1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/encodeurl/-/encodeurl-1.0.2.tgz"
