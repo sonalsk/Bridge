@@ -21,6 +21,14 @@ const CreateRoom = (props) => {
         props.history.push(`/room/${id}`);
     }
 
+    function scheduleID() {
+        const id = uuid();
+        var url = window.location.href;
+        var n = url.lastIndexOf('CreateRoom');
+        return url.substring(0, n - 1) + `/room/${id}`;
+    }
+    
+
     function sendEmail(e) {
         e.preventDefault();    //This is important, i'm not sure why, but the email won't send without it
 
@@ -32,10 +40,8 @@ const CreateRoom = (props) => {
           });
       }
       
-    
-
     function MyVerticallyCenteredModal(props) {
-        var id = window.location.href;
+        var id = scheduleID();
         return (
             
             <Modal
