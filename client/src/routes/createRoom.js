@@ -52,43 +52,55 @@ const CreateRoom = (props) => {
             >
             
             <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
+                <Modal.Title id="contained-modal-title-vcenter" class="InvHeading">
                 Send an Email Invitation
                 </Modal.Title>
             </Modal.Header>
             
             <Modal.Body>
-
-                
                 <form className="contact-form" onSubmit={sendEmail}>
-                    
-                    <label>Name of Organiser</label>
-                    <input type="text" name="from_name" />
-                    <br></br>
-                    <label>Email Address of Organiser</label>
-                    <input type="email" name="from_email" />
-                    <br></br>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Name of Organiser</label>
+                            <input type="text" name="from_name" />
 
-                    <label>Name of Attendee</label>
-                    <input type="text" name="to_name" />
-                    <br></br>
-                    <label>Email Address of Attendee</label>
-                    <input type="email" name="to_email" />
-                    <br></br>
+                            <label>Email Address of Organiser</label>
+                            <input type="email" name="from_email" />
+                        </div>
+                        <div class="col-6">
+                            <label>Name of Attendee</label>
+                            <input type="text" name="to_name" />
 
-                    <label>Date of the Meeting</label>
-                    <input type="date" name="date" />
-                    <br></br>
+                            <label>Email Address of Attendee</label>
+                            <input type="email" name="to_email" />
+                        </div>
+                    </div>
 
-                    <label>Time of the Meeting</label>
-                    <input type="time" name="time" />
-                    <br></br>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Date of the Meeting</label> <br></br>
+                            <input type="date" name="date" />
+                        </div>
+                        <div class="col-6">
+                            <label>Time of the Meeting</label> <br></br>
+                            <input type="time" name="time" />
+                        </div>
+                    </div>
 
-                    <input type="text" name = "id" value={id}></input>
+                    <div class="row my-4">
+                        <div class="col-12">
+                            <label>Link to the Meeting</label> <br></br>
+                            <input type="text" name = "id" value={id}></input>
+                        </div>
+                    </div>
 
-                    <br></br>
-                    <input type="submit" value="Send" />
-                    <Button onClick={props.onHide}>Close</Button>
+                    <div class="row">
+                        <div class="col-6">
+                            <input class="scheduleBtn" type="submit" value="Send" />
+                            <button class="scheduleBtn" onClick={props.onHide}> Close </button>
+                        </div>
+                    </div>
+
                 </form>
             </Modal.Body>
             </Modal>
