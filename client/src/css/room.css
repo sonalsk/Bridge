@@ -43,6 +43,34 @@ video {
     background-color: #787cd1;
     border: none;
 }
+#cp {
+    color: #f6f6f6;
+    background-color: #302b70;
+    border: none;
+    font-size: large;
+    padding: 1rem;
+    border-radius: 100%;
+    margin-right: 1rem;
+}
+#cp:hover {
+    color: #f6f6f6;
+    background-color: #787cd1;
+    border: none;
+}
+#ss {
+    color: #f6f6f6;
+    background-color: #302b70;
+    border: none;
+    font-size: large;
+    padding: 1rem;
+    border-radius: 100%;
+    margin-right: 1rem;
+}
+#ss:hover {
+    color: #f6f6f6;
+    background-color: #787cd1;
+    border: none;
+}
 #end {
     color: #f6f6f6;
     background-color:#5ec9cc;

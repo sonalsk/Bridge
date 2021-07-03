@@ -12,6 +12,7 @@ const Room = (props) => {
     const socketRef = useRef();
     const otherUser = useRef();
     const userStream = useRef();
+    const senders = useRef([]);
     var localStream;
 
     useEffect(() => {
@@ -56,7 +57,9 @@ const Room = (props) => {
         peerRef.current = createPeer(userID);
         // streaming the user a stream
         // giving access to our peer of our individual stream
-        userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
+        // storing all the objects sent by the user into the senders array
+        userStream.current.getTracks().forEach(track => senders.current.push(
+                                                        peerRef.current.addTrack(track, userStream.current)));
     }
 
     // user id of the person we are trying to call ( user b )
@@ -205,6 +208,35 @@ const Room = (props) => {
         window.location.replace("/");
     }
 
+    // Sharing the Screen
+    function shareScreen() {
+        // asking for the display media along with the cursor movement of the user sharing the screen
+        navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
+            const screenTrack = stream.getTracks()[0];
+
+            // finding the track which has a type "video", and then replacing it with the current track which is playing
+            document.getElementById('ss').style.backgroundColor = '#bc1823';
+            senders.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
+
+            // when the screenshare is turned off, replace the displayed screen with the video of the user
+            screenTrack.onended = function() {
+                senders.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
+                document.getElementById('ss').style.backgroundColor = '#302b70';
+            }
+        })
+    }
+
+    // Copy the Url
+    function getUrl() {
+        var inputc = document.body.appendChild(document.createElement("input"));
+        inputc.value = window.location.href;
+        inputc.focus();
+        inputc.select();
+        document.execCommand('copy');
+        inputc.parentNode.removeChild(inputc);
+        alert("URL Copied.");
+    }
+
     return (
         <div>            
             <div id = "video-box">
@@ -213,12 +245,13 @@ const Room = (props) => {
             </div>
             
             <div id ="button-box">
+                <button id="cp" onClick = {getUrl}> <i class="far fa-copy"></i> </button>
                 <button id="av" onClick = {toggleAudio}> <i class="fas fa-microphone-slash"></i> </button>
                 <button id="end" onClick = {hangUp}> <i class="fas fa-phone-square-alt fa-3x"></i> </button>
                 <button id="avv" onClick = {toggleVideo}> <i class="fas fa-video"></i> </button>
-            </div>
-        </div>
-        
+                <button id="ss" onClick = {shareScreen}> <i class="fas fa-external-link-alt"></i> </button>
+            </div>            
+        </div>        
     );
 };
 
