@@ -24,6 +24,9 @@ const Room = (props) => {
             userVideo.current.srcObject = stream;
             userStream.current = stream;
             localStream = stream;
+
+            
+           
             
             // grabbing the room id from the url and then sending it to the socket io server
             socketRef.current = io.connect("/");
@@ -240,8 +243,8 @@ const Room = (props) => {
     return (
         <div>            
             <div id = "video-box">
-                <video autoPlay ref = {userVideo} />
-                <video autoPlay ref = {partnerVideo} />
+                <video muted="muted" autoPlay ref = {userVideo} />
+                <video muted="muted" autoPlay ref = {partnerVideo} />
             </div>
             
             <div id ="button-box">
