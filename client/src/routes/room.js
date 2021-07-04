@@ -1,7 +1,8 @@
 /* ------ IMPORTING FILES ------- */
 import '../css/room.css'
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import io from "socket.io-client";
+import { Button, Container } from 'react-bootstrap';
 
 const Room = (props) => {
 
@@ -13,6 +14,10 @@ const Room = (props) => {
     const otherUser = useRef();
     const userStream = useRef();
     const senders = useRef([]);
+    const sendChannel = useRef();
+    const [text, setText] = useState("");
+    const [messages, setMessages] = useState([]);
+    
     var localStream;
 
     useEffect(() => {
@@ -24,9 +29,6 @@ const Room = (props) => {
             userVideo.current.srcObject = stream;
             userStream.current = stream;
             localStream = stream;
-
-            
-           
             
             // grabbing the room id from the url and then sending it to the socket io server
             socketRef.current = io.connect("/");
@@ -58,11 +60,21 @@ const Room = (props) => {
     function callUser(userID) {
         // taking the peer ID
         peerRef.current = createPeer(userID);
+        
         // streaming the user a stream
         // giving access to our peer of our individual stream
         // storing all the objects sent by the user into the senders array
         userStream.current.getTracks().forEach(track => senders.current.push(
                                                         peerRef.current.addTrack(track, userStream.current)));
+
+        // creating a data channel for chatting
+        sendChannel.current = peerRef.current.createDataChannel("sendChannel");
+        sendChannel.current.onmessage = handleReceiveMessage;                                 
+    }
+
+    // recieving the messages from the peer
+    function handleReceiveMessage(e) {
+        setMessages(messages => [...messages, {yours: false, value: e.data }]);
     }
 
     // user id of the person we are trying to call ( user b )
@@ -114,6 +126,12 @@ const Room = (props) => {
     // recieving the call
     function handleRecieveCall(incoming) {
         peerRef.current = createPeer();
+
+        // chatting
+        peerRef.current.ondatachannel = (event) => {
+            sendChannel.current = event.channel;
+            sendChannel.current.onmessage = handleReceiveMessage;
+        };
         
         // remote description
         const desc = new RTCSessionDescription(incoming.sdp);
@@ -206,8 +224,9 @@ const Room = (props) => {
 
     // Hanging up the call
     function hangUp() {
-        localStream.getVideoTracks()[0].enabled = false;
-        localStream.getAudioTracks()[0].enabled = false;
+        // localStream.getVideoTracks()[0].enabled = false;
+        // localStream.getAudioTracks()[0].enabled = false;
+        userStream.current.getVideoTracks()[0].enabled = false;
         window.location.replace("/");
     }
 
@@ -240,20 +259,67 @@ const Room = (props) => {
         alert("URL Copied.");
     }
 
-    return (
-        <div>            
-            <div id = "video-box">
-                <video muted="muted" autoPlay ref = {userVideo} />
-                <video muted="muted" autoPlay ref = {partnerVideo} />
+    function handleChange(e) {
+        setText(e.target.value);
+    }
+
+    function sendMessage(e) {
+        sendChannel.current.send(text);
+        setMessages(messages => [...messages, { yours: true, value: text }]);
+        setText("");
+    }
+
+    function renderMessage(message, index) {
+        if (message.yours) {
+            return (
+                <div class="myRow" key={index}>
+                    <div class="myMSG">
+                        {message.value}
+                    </div>
+                </div>
+            )
+        }
+
+        return (
+            <div class="partnerRow" key={index}>
+                <div class="partnerMSG">
+                    {message.value}
+                </div>
             </div>
-            
-            <div id ="button-box">
-                <button id="cp" onClick = {getUrl}> <i class="far fa-copy"></i> </button>
-                <button id="av" onClick = {toggleAudio}> <i class="fas fa-microphone-slash"></i> </button>
-                <button id="end" onClick = {hangUp}> <i class="fas fa-phone-square-alt fa-3x"></i> </button>
-                <button id="avv" onClick = {toggleVideo}> <i class="fas fa-video"></i> </button>
-                <button id="ss" onClick = {shareScreen}> <i class="fas fa-external-link-alt"></i> </button>
-            </div>            
+        )
+    }
+
+    return (
+        <div class="box">   
+            <div class="row">
+                <div class="col-9">
+                    <div id = "video-box">
+                        <video autoPlay ref = {userVideo} />
+                        <video autoPlay ref = {partnerVideo} />
+                    </div>
+                
+                    <div id ="button-box">
+                        <button id="cp" onClick = {getUrl}> <i class="far fa-copy"></i> </button>
+                        <button id="av" onClick = {toggleAudio}> <i class="fas fa-microphone-slash"></i> </button>
+                        <button id="end" onClick = {hangUp}> <i class="fas fa-phone-square-alt fa-3x"></i> </button>
+                        <button id="avv" onClick = {toggleVideo}> <i class="fas fa-video"></i> </button>
+                        <button id="ss" onClick = {shareScreen}> <i class="fas fa-external-link-alt"></i> </button>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="chatBox">
+                        <div class="text-area">
+                            {messages.map(renderMessage)}
+                        </div>
+                        <div class="row text-box">
+                            <textarea class="text" value={text} onChange={handleChange} placeholder="Say Something..."/>
+                            <button id="send" onClick={sendMessage}>Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>         
+                        
         </div>        
     );
 };
