@@ -205,7 +205,8 @@ const Room = (props) => {
             colorVideo = '#bc1823';
         }
         isVideo = !isVideo;
-        localStream.getVideoTracks()[0].enabled = isVideo;
+        // localStream.getVideoTracks()[0].enabled = isVideo;
+        userStream.current.getVideoTracks()[0].enabled = isVideo;
     }
 
     // Toggle Audio
@@ -219,7 +220,8 @@ const Room = (props) => {
             colorAudio = '#bc1823';
         }
         isAudio = !isAudio;
-        localStream.getAudioTracks()[0].enabled = isAudio;
+        // localStream.getAudioTracks()[0].enabled = isAudio;
+        userStream.current.getAudioTracks()[0].enabled = isAudio;
     }
 
     // Hanging up the call
