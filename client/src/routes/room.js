@@ -296,7 +296,7 @@ const Room = (props) => {
             <div class="row">
                 <div class="col-9">
                     <div id = "video-box">
-                        <video autoPlay ref = {userVideo} />
+                        <video muted autoPlay ref = {userVideo} />
                         <video autoPlay ref = {partnerVideo} />
                     </div>
                 

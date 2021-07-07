@@ -54,7 +54,7 @@ function Mode() {
                                 <Card.Img id='customCardImg' variant="top" src={group} />
                                 <Card.Body id='customCardText'>
                                     <Card.Title>Group Call</Card.Title>
-                                    <button class="choiceButton">
+                                    <button class="choiceButton" onClick={() => window.location.replace("/CreateRoomGroup")}>
                                         Get Started
                                     </button>
                                 </Card.Body>
