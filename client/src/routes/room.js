@@ -64,8 +64,10 @@ const Room = (props) => {
         // streaming the user a stream
         // giving access to our peer of our individual stream
         // storing all the objects sent by the user into the senders array
-        userStream.current.getTracks().forEach(track => senders.current.push(
-                                                        peerRef.current.addTrack(track, userStream.current)));
+        // userStream.current.getTracks().forEach(track => senders.current.push(
+        //                                                 peerRef.current.addTrack(track, userStream.current)));
+
+        userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
 
         // creating a data channel for chatting
         sendChannel.current = peerRef.current.createDataChannel("sendChannel");
@@ -305,7 +307,7 @@ const Room = (props) => {
                         <button id="av" onClick = {toggleAudio}> <i class="fas fa-microphone-slash"></i> </button>
                         <button id="end" onClick = {hangUp}> <i class="fas fa-phone-square-alt fa-3x"></i> </button>
                         <button id="avv" onClick = {toggleVideo}> <i class="fas fa-video"></i> </button>
-                        <button id="ss" onClick = {shareScreen}> <i class="fas fa-external-link-alt"></i> </button>
+                        {/* <button id="ss" onClick = {shareScreen}> <i class="fas fa-external-link-alt"></i> </button> */}
                     </div>
                 </div>
 
