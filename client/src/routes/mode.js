@@ -23,7 +23,7 @@ function Mode() {
                         <p>A simple and elegant way to connect with your peers!</p>
                         <button class="homeButton" onClick={() => window.location.replace("/#choice")}>Get Started </button>
                     </div>
-                    <div class="col-md-6 c2">
+                    <div class="col-md-6 align-self-center c2">
                         <img src={home} class="d-none d-md-block about-img"></img>
                     </div>
                 </div>
