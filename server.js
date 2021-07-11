@@ -1,38 +1,24 @@
 /* ------ IMPORTING FILES ------- */
-
-
 require("dotenv").config();
-// importing express module
 const express = require("express");
-// importing http - built in node module
 const http = require("http");
-// creating app module
 const app = express();
-// creating a server and passing our application
 const server = http.createServer(app);
-// importing socket.io
 const socket = require("socket.io");
-// instance of io by taking the existing server
 const io = socket(server);
 const path = require("path");
-
 
 /* ------ CREATING AND JOINING ROOMS FOR CONNECTION BETWEEN USERS ------ */
 
 // room object to store the created room IDs
 const rooms = {};
-
 const users = {};
-
 const socketToRoom = {};
 
 // when the user is forming a connection with socket.io
 io.on("connection", socket => {
     
-    // Handling One on One Video Call ----------------------------
-
-    // the join room event will get started from the client side
-    // pulling roomID and checking for validity
+    // handling one on one video call
     socket.on("join room", roomID => {
         
         // if the room is already created, that means a person has already joined the room
@@ -69,9 +55,7 @@ io.on("connection", socket => {
         io.to(incoming.target).emit("ice-candidate", incoming.candidate);
     });
 
-    // End of One on One Video Call ----------------------------
-
-    // Handling Group Video Call ------------------------------
+    // handling Group Video Call
     socket.on("join room group", roomID => {
         // getting the room with the room ID and adding the user to the room
         if (users[roomID]) {
@@ -105,6 +89,7 @@ io.on("connection", socket => {
 
     // handling user disconnect in group call
     socket.on('disconnect', () => {
+        
         // getting the room array with all the participants
         const roomID = socketToRoom[socket.id];
         let room = users[roomID];
@@ -119,9 +104,6 @@ io.on("connection", socket => {
         // emiting a signal and sending it to everyone that a user left
         socket.broadcast.emit('user left', socket.id);
     });
-
-    // End of Group Video Call ------------------------------
-
 });
 
 if (process.env.PROD) {
@@ -131,7 +113,5 @@ if (process.env.PROD) {
     });
 }
 
-
 const port = process.env.PORT || 8000;
-// server where the application will run locally
 server.listen(port, () => console.log(`the web server is running on port ${port}`));
