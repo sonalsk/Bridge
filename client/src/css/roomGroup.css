@@ -1,0 +1,22 @@
+.group-call {
+    align-items: center;
+    justify-content: center;
+}
+video {
+    width: 25vw;
+    height: 15vw;
+    margin: 2rem;
+    margin-top: 3rem;
+    background: rgb(19, 37, 64, 0.8);
+    border-radius: 30px;
+}
+
+#button-box {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 2rem;
+}

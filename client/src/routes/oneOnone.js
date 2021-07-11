@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CreateRoom from './createRoom';
 
 // Function to redirect the user
-// to the on one on video call functions
+// to the one on one video call functions
 
 function oneOnone() {
   return (

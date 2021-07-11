@@ -2,7 +2,6 @@
 import '../css/room.css'
 import React, { useRef, useEffect, useState } from "react";
 import io from "socket.io-client";
-import { Button, Container } from 'react-bootstrap';
 
 const Room = (props) => {
 
@@ -17,7 +16,6 @@ const Room = (props) => {
     const sendChannel = useRef();
     const [text, setText] = useState("");
     const [messages, setMessages] = useState([]);
-    
     var localStream;
 
     useEffect(() => {
@@ -47,11 +45,12 @@ const Room = (props) => {
 
             // calling the function when made an offer
             socketRef.current.on("offer", handleRecieveCall);
+            
             // sending the answer back to socket
             socketRef.current.on("answer", handleAnswer);
-            // joining the user after receiving
+            
+            // joining the user after receiving offer
             socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
-
         });
 
     }, []);
@@ -66,8 +65,6 @@ const Room = (props) => {
         // storing all the objects sent by the user into the senders array
         userStream.current.getTracks().forEach(track => senders.current.push(
                                                         peerRef.current.addTrack(track, userStream.current)));
-
-        // userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
 
         // creating a data channel for chatting
         sendChannel.current = peerRef.current.createDataChannel("sendChannel");
@@ -126,7 +123,6 @@ const Room = (props) => {
         }).catch(e => console.log(e));
     }
 
-
     // recieving the call
     function handleRecieveCall(incoming) {
         peerRef.current = createPeer();
@@ -163,7 +159,6 @@ const Room = (props) => {
         })
     }
 
-
     // function to handle the answer which the user a (who created the call) is receiving
     function handleAnswer(message) {
         const desc = new RTCSessionDescription(message.sdp);
@@ -177,8 +172,6 @@ const Room = (props) => {
     function handleICECandidateEvent(e) {
         if (e.candidate) {
             const payload = {
-
-                // target can be user a or user b
                 target: otherUser.current,
                 candidate: e.candidate,
             }
@@ -192,8 +185,7 @@ const Room = (props) => {
         peerRef.current.addIceCandidate(candidate).catch(e => console.log(e));
     }
     
-    // receiving the remote stream of peer
-    // attaching the video of partner
+    // receiving the remote stream of peer and attaching the video of partner
     function handleTrackEvent(e) {
         partnerVideo.current.srcObject = e.streams[0];
     };
@@ -209,7 +201,6 @@ const Room = (props) => {
             colorVideo = '#bc1823';
         }
         isVideo = !isVideo;
-        // localStream.getVideoTracks()[0].enabled = isVideo;
         userStream.current.getVideoTracks()[0].enabled = isVideo;
     }
 
@@ -224,14 +215,11 @@ const Room = (props) => {
             colorAudio = '#bc1823';
         }
         isAudio = !isAudio;
-        // localStream.getAudioTracks()[0].enabled = isAudio;
         userStream.current.getAudioTracks()[0].enabled = isAudio;
     }
 
     // Hanging up the call
     function hangUp() {
-        // localStream.getVideoTracks()[0].enabled = false;
-        // localStream.getAudioTracks()[0].enabled = false;
         userStream.current.getVideoTracks()[0].enabled = false;
         window.location.replace("/");
     }
@@ -265,16 +253,19 @@ const Room = (props) => {
         alert("URL Copied.");
     }
 
+    // handling text change when recieved
     function handleChange(e) {
         setText(e.target.value);
     }
 
+    // sending message to the peer
     function sendMessage(e) {
         sendChannel.current.send(text);
         setMessages(messages => [...messages, { yours: true, value: text }]);
         setText("");
     }
 
+    // differentiating messages from user a and user b
     function renderMessage(message, index) {
         if (message.yours) {
             return (
@@ -298,7 +289,7 @@ const Room = (props) => {
     return (
         <div class="box">   
             <div class="row">
-                <div class="col-9">
+                <div class="col-12 col-md-9">
                     <div id = "video-box">
                         <video muted autoPlay ref = {userVideo} />
                         <video autoPlay ref = {partnerVideo} />
@@ -313,15 +304,18 @@ const Room = (props) => {
                     </div>
                 </div>
 
-                <div class="col-3">
+                <div class="col-12 col-md-3 chat">
                     <div class="chatBox">
-                        <div class="text-area">
+                        
+                        <div class="row text-area">
                             {messages.map(renderMessage)}
                         </div>
+                        
                         <div class="row text-box">
                             <textarea class="text" value={text} onChange={handleChange} placeholder="Say Something..."/>
                             <button id="send" onClick={sendMessage}>Send</button>
                         </div>
+
                     </div>
                 </div>
             </div>         

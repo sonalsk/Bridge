@@ -7,20 +7,20 @@ import '../css/createRoom.css'
 import { Modal} from 'react-bootstrap';
 import emailjs from 'emailjs-com';
 
+// Function to give the user options to schedule a group call or start instant group call
+// Used uuid to create and have unique ID for each room
 
 /* ------ CREATING A ROOM ------ */
-
 const CreateRoomGroup = (props) => {
+
+    // creating a room id
+    // redirecting the user to the correct page
     function create() {
-        
-        // creating the room id
         const id = uuid();
-        
-        // use the unique room id in the url
-        // to redirect the user to the correct page
         props.history.push(`/roomGroup/${id}`);
     }
 
+    // creating a room id for scheduling a call
     function scheduleID() {
         const id = uuid();
         var url = window.location.href;
@@ -28,17 +28,19 @@ const CreateRoomGroup = (props) => {
         return url.substring(0, n - 1) + `/room/${id}`;
     }
     
+    // sending an email to the user
     function sendEmail(e) {
         e.preventDefault();
 
-        emailjs.sendForm('gmail', 'template_kgfrx5w', e.target, 'user_nAYJJym0KTqRP8NWdzKqS')
-          .then((result) => {
-              window.location.reload()
-          }, (error) => {
-              console.log(error.text);
-          });
-      }
+        emailjs.sendForm('gmail', 'template_kr4bcy2', e.target, 'user_nAYJJym0KTqRP8NWdzKqS')
+            .then((result) => {
+                window.location.reload()
+            }, (error) => {
+                console.log(error.text);
+            });
+    }
       
+    // modal for scheduling details
     function MyVerticallyCenteredModal(props) {
         var id = scheduleID();
         return (
@@ -63,15 +65,29 @@ const CreateRoomGroup = (props) => {
                             <label>Name of Organiser</label>
                             <input type="text" name="from_name" />
 
-                            <label>Email Address of Organiser</label>
-                            <input type="email" name="from_email" />
+                            <label>Name of Attendee 1</label>
+                            <input type="text" name="to_name_1" />
+
+                            <label>Name of Attendee 2</label>
+                            <input type="text" name="to_name_2" />
+
+                            <label>Name of Attendee 3</label>
+                            <input type="text" name="to_name_3" />
+                            
                         </div>
                         <div class="col-6">
-                            <label>Name of Attendee</label>
-                            <input type="text" name="to_name" />
 
-                            <label>Email Address of Attendee</label>
-                            <input type="email" name="to_email" />
+                            <label>Email Address of Organiser</label>
+                            <input type="email" name="from_email" />
+
+                            <label>Email Address of Attendee 1</label>
+                            <input type="email" name="to_email_1" />
+
+                            <label>Email Address of Attendee 2</label>
+                            <input type="email" name="to_email_2" />
+
+                            <label>Email Address of Attendee 3</label>
+                            <input type="email" name="to_email_3" />
                         </div>
                     </div>
 
@@ -112,7 +128,7 @@ const CreateRoomGroup = (props) => {
         <div>
             <section id="oo-lp">
                 <div class="row">
-                    <div class="col-md-6 c2">
+                    <div class="col-md-6">
                         <img src={groupPage} class="d-none d-md-block about-img-cr"></img>
                     </div>
                     <div class="col-md-6 align-self-center welcomeCR">

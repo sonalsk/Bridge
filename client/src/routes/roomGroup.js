@@ -1,9 +1,11 @@
 /* ------ IMPORTING FILES ------- */
 import '../css/room.css'
+import '../css/roomGroup.css'
 import React, { useRef, useEffect, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 
+// Streaming Video of the user
 const Video = (props) => {
     const ref = useRef();
 
@@ -18,6 +20,7 @@ const Video = (props) => {
     )
 }
 
+// setting the constraints of video box
 const videoConstraints = {
     height: window.innerHeight / 2,
     width: window.innerWidth / 2
@@ -36,13 +39,20 @@ const RoomGroup = (props) => {
     useEffect(() => {
         socketRef.current = io.connect("/");
         
+        // asking for audio and video access
         navigator.mediaDevices.getUserMedia({ audio: true, video: videoConstraints }).then(stream => {
+
+            // streaming the audio and video
             userVideo.current.srcObject = stream;
             userStream.current = stream;
-            socketRef.current.emit("join room group", roomID);
             
+            socketRef.current.emit("join room group", roomID);
+
+            // getting all user for the new user joining in
             socketRef.current.on("all users", users => {
                 const peers = [];
+
+                // adding the new user to the group
                 users.forEach(userID => {
                     const peer = createPeer(userID, socketRef.current.id, stream);
                     peersRef.current.push({
@@ -57,6 +67,7 @@ const RoomGroup = (props) => {
                 setPeers(peers);
             })
 
+            // sending signal to existing users after new user joined
             socketRef.current.on("user joined", payload => {
                 const peer = addPeer(payload.signal, payload.callerID, stream);
                 peersRef.current.push({
@@ -72,6 +83,7 @@ const RoomGroup = (props) => {
                 setPeers(users => [...users, peerObj]);
             });
 
+            // exisisting users recieving the signal
             socketRef.current.on("receiving returned signal", payload => {
                 const item = peersRef.current.find(p => p.peerID === payload.id);
                 item.peer.signal(payload.signal);
@@ -93,6 +105,7 @@ const RoomGroup = (props) => {
         })
     }, []);
 
+    // creating a peer object for newly joined user
     function createPeer(userToSignal, callerID, stream) {
         const peer = new Peer({
             initiator: true,
@@ -107,6 +120,7 @@ const RoomGroup = (props) => {
         return peer;
     }
 
+    // adding the newly joined peer to the room
     function addPeer(incomingSignal, callerID, stream) {
         const peer = new Peer({
             initiator: false,
@@ -122,17 +136,6 @@ const RoomGroup = (props) => {
         return peer;
     }
 
-    // Copy the Url
-    function getUrl() {
-        var inputc = document.body.appendChild(document.createElement("input"));
-        inputc.value = window.location.href;
-        inputc.focus();
-        inputc.select();
-        document.execCommand('copy');
-        inputc.parentNode.removeChild(inputc);
-        alert("URL Copied.");
-    }
-
     // Toggle Video
     let isVideo = true;
     let colorVideo = '#bc1823';
@@ -144,7 +147,6 @@ const RoomGroup = (props) => {
             colorVideo = '#bc1823';
         }
         isVideo = !isVideo;
-        // localStream.getVideoTracks()[0].enabled = isVideo;
         userStream.current.getVideoTracks()[0].enabled = isVideo;
     }
 
@@ -159,14 +161,19 @@ const RoomGroup = (props) => {
             colorAudio = '#bc1823';
         }
         isAudio = !isAudio;
-        // localStream.getAudioTracks()[0].enabled = isAudio;
         userStream.current.getAudioTracks()[0].enabled = isAudio;
     }
 
+    // Hanging up the call
+    function hangUp() {
+        userStream.current.getVideoTracks()[0].enabled = false;
+        window.location.replace("/");
+    }
+
     return (
-        <div class="row">
+        <div class="row group-call">
             <div col="col-12">
-                <div>
+                <div class="videos">
                     <video muted ref={userVideo} autoPlay playsInline />
                     {peers.map((peer) => {
                         return (
@@ -176,11 +183,9 @@ const RoomGroup = (props) => {
                 </div>
 
                 <div id ="button-box">
-                    <button id="cp" onClick = {getUrl}> <i class="far fa-copy"></i> </button>
                     <button id="av" onClick = {toggleAudio}> <i class="fas fa-microphone-slash"></i> </button>
-                    {/* <button id="end" onClick = {hangUp}> <i class="fas fa-phone-square-alt fa-3x"></i> </button> */}
+                    <button id="end" onClick = {hangUp}> <i class="fas fa-phone-square-alt fa-3x"></i> </button>
                     <button id="avv" onClick = {toggleVideo}> <i class="fas fa-video"></i> </button>
-                    {/* <button id="ss" onClick = {shareScreen}> <i class="fas fa-external-link-alt"></i> </button> */}
                 </div> 
 
                 

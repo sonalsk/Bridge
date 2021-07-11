@@ -3,7 +3,6 @@
     align-items: center;
     margin-top: 6%;
 }
-
 video {
     width: 30vw;
     height: 20vw;
@@ -88,6 +87,7 @@ video {
     background-color: #bc1823;
 }
 
+
 .chatBox {
     margin: 1rem;
     margin-right: 3rem;
@@ -133,25 +133,6 @@ video {
     background-color: #787cd1;
     border: none;   
 }
-/* .yourMSG {
-    background-color: #797cd1;
-    width: fit-content;
-    height: 2rem;
-    padding: 1rem;
-    padding-top: 0.2rem;
-    color: #f6f6f6;
-    align-self: right;
-}
-.peerMSG {
-    background-color: #3e3894;
-    width: fit-content;
-    height: 2rem;
-    padding: 1rem;
-    padding-top: 0.2rem;
-    color: #f6f6f6;
-    align-self: left;
-} */
-
 .myRow {
     width: 100%;
     display: flex;
@@ -163,7 +144,6 @@ video {
     background-color: #3e3894;
     color: #f6f6f6;
     padding: 0.5rem;
-    /* text-align: center; */
     border-radius: 1rem;
 }
 .partnerRow {
@@ -177,6 +157,5 @@ video {
     background-color: #797cd1;
     color: #f6f6f6;
     padding: 0.5rem;
-    /* text-align: center; */
     border-radius: 1rem;
 }

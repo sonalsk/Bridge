@@ -1,20 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
-.end {
-    height: 15rem;
+
+.landing-page {
+    margin-left: 5rem;
+    margin-bottom: 5rem;
+    margin-right: 5rem;
+    margin-top: 2rem;
 }
 
-/* landing page */
+.main-welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .welcome {
-    margin-top: 2rem;
     text-align: left;
-    padding-left: 18%;
     font-family: 'Montserrat', sans-serif;
     color: #132540;
     font-size: 1.5rem;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .welcome h1 {
     font-weight: 700;
-    font-size: 4.5rem;
+    font-size: 5rem;
 }
 .welcome p {
     margin-top: 2rem;
@@ -33,26 +43,42 @@
     background-color: #787cd1;
     border: none;
 }
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .about-img {
     height: 40rem;
-    position: relative;
-    padding-left: 5rem;
-    padding-top: 5rem;
+    padding: 2rem;
 }
 
 /* modes */
-.modeChoice {
-    margin-top: 8rem;
+#main-choice {
+    margin-top: 5rem;
+}
+.mode-heading {
     text-align: left;
     font-family: 'Montserrat', sans-serif;
     color: #132540;
     font-size: 1.5rem;
-    padding-left: 18%;
-    padding-right: 8%;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 7%;
 }
-.modeChoice h1 {
+.heading h1 {
     font-weight: 700;
     font-size: 4rem;
+}
+.mode-cards{
+    padding-left: 2rem;
+}
+.eachCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .customCard {
     margin-top: 2rem;
@@ -60,23 +86,25 @@
     border-radius: 20px;
     color: #f2f3f6;
     padding-top: 1rem;
+    
     width: 20rem;
     height: 20rem;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: x-large;
+    text-align: center;
 }
 #customCardImg{
     height: 10rem;
     width: 12rem;
     align-self: center;
 }
-#customCardText {
-    text-align: center;
-}
 .choiceButton {
     color: #302b70;
     background-color: #f0f2f6;
     border: none;
     padding: 3%;
-    border-radius: 8px;
+    border-radius: 8px;    
 }
 .choiceButton:hover {
     color: #f6f6f6;
