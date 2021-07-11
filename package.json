@@ -6,6 +6,7 @@
   "author": "sonalsk <sonalkushwaha039@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "bootstrap": "4.6.0",
     "dotenv": "^10.0.0",
     "emailjs-com": "^3.1.0",

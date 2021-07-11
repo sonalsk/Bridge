@@ -82,7 +82,7 @@ function Mode() {
                                     <Card.Img id='customCardImg' variant="top" src={broadcast} />
                                     <Card.Body id='customCardText'>
                                         <Card.Title>Broadcast</Card.Title>
-                                        <button class="choiceButton">
+                                        <button class="choiceButton" onClick={() => window.location.replace("/CreateRoomBroadcast")}>
                                             Get Started
                                         </button>
                                     </Card.Body>
