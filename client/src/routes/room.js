@@ -291,8 +291,8 @@ const Room = (props) => {
             <div class="row">
                 <div class="col-12 col-md-9">
                     <div id = "video-box">
-                        <video muted autoPlay ref = {userVideo} />
-                        <video autoPlay ref = {partnerVideo} />
+                        <video className="oneVideo" muted autoPlay ref = {userVideo} />
+                        <video className="oneVideo" autoPlay ref = {partnerVideo} />
                     </div>
                 
                     <div id ="button-box">
@@ -306,7 +306,6 @@ const Room = (props) => {
 
                 <div class="col-12 col-md-3 chat">
                     <div class="chatBox">
-                        
                         <div class="row text-area">
                             {messages.map(renderMessage)}
                         </div>
