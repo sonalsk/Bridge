@@ -2,7 +2,6 @@
 
 .landing-page {
     margin-left: 5rem;
-    margin-bottom: 5rem;
     margin-right: 5rem;
     margin-top: 2rem;
 }
@@ -110,4 +109,7 @@
     color: #f6f6f6;
     background-color: #787cd1;
     border: none;
+}
+.footer {
+    margin-top: 4rem;
 }

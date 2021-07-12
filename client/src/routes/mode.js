@@ -13,7 +13,7 @@ import broadcast from '../assets/broadcast.png'
 function Mode() {
     return (
 
-        <div class="landing-page">            
+        <div class="landing-page">           
             
             {/* Welcome Page */}
             <section className="main-welcome">
@@ -92,7 +92,22 @@ function Mode() {
                     </div>
 
                 </div>
-            </section>            
+            </section>  
+            
+            {/* Footer */}
+            <footer class = "text-center footer">
+                <p> This site is developed by 
+                    <a href = "https://www.linkedin.com/in/sonal-kushwaha/" target="_blank">
+                        <span> Sonal Kushwaha </span>
+                    </a>
+                    <br></br>
+                    <span>Last updated on July 12, 2021</span>
+                    <p> &copy; 2021</p>
+                </p>
+            </footer>
+
+
+
         </div>
     );
 }
