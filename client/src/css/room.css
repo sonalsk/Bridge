@@ -138,6 +138,9 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 0.5rem;
+    height: fit-content;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 .myMSG {
     width: 45%;
@@ -145,12 +148,16 @@
     color: #f6f6f6;
     padding: 0.5rem;
     border-radius: 1rem;
+    height: fit-content;
 }
 .partnerRow {
     width: 100%;
     display: flex;
     justify-content: flex-start;
     margin-top: 0.5rem;
+    height: fit-content;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 .partnerMSG {
     width: 45%;
@@ -158,4 +165,5 @@
     color: #f6f6f6;
     padding: 0.5rem;
     border-radius: 1rem;
+    height: fit-content;
 }
