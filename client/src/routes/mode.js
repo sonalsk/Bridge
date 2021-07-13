@@ -6,6 +6,7 @@ import home from '../assets/home.png';
 import one from '../assets/one.png'
 import group from '../assets/group.png'
 import broadcast from '../assets/broadcast.png'
+import chat from '../assets/chatting.png'
 
 // Function to provide the user with 3 different choices
 // one on one call, group call and broadcast
@@ -48,7 +49,7 @@ function Mode() {
 
                     <div class="row mode-cards">
                        
-                        <div class="col-12 col-md-4 eachCard">
+                        <div class="col-12 col-md-3 eachCard">
                             <div>
                                 <Card className='customCard'>
                                     <Card.Img id='customCardImg' variant="top" src={one} />
@@ -62,7 +63,7 @@ function Mode() {
                             </div>
                         </div>
                         
-                        <div class="col-12 col-md-4 eachCard">
+                        <div class="col-12 col-md-3 eachCard">
                             <div>
                                 <Card className='customCard'>
                                     <Card.Img id='customCardImg' variant="top" src={group} />
@@ -75,8 +76,22 @@ function Mode() {
                                 </Card>
                             </div>
                         </div>
+
+                        <div class="col-12 col-md-3 eachCard">
+                            <div>
+                                <Card className='customCard'>
+                                    <Card.Img id='customCardImg' variant="top" src={chat} />
+                                    <Card.Body id='customCardText'>
+                                        <Card.Title>Chatting</Card.Title>
+                                        <button class="choiceButton" onClick={() => window.location.replace("/CreateRoomBroadcast")}>
+                                            Get Started
+                                        </button>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+                        </div>
                         
-                        <div class="col-12 col-md-4 eachCard">
+                        <div class="col-12 col-md-3 eachCard">
                             <div>
                                 <Card className='customCard'>
                                     <Card.Img id='customCardImg' variant="top" src={broadcast} />
@@ -89,6 +104,7 @@ function Mode() {
                                 </Card>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -96,7 +112,7 @@ function Mode() {
             
             {/* Footer */}
             <footer class = "text-center footer">
-                <p> This site is developed by 
+                <p> This site is developed by
                     <a href = "https://www.linkedin.com/in/sonal-kushwaha/" target="_blank">
                         <span> Sonal Kushwaha </span>
                     </a>

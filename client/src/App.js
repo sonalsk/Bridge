@@ -8,6 +8,8 @@ import Mode from './routes/mode';
 import CreateRoomGroup from './routes/createRoomGroup';
 import RoomGroup from './routes/roomGroup';
 import CreateRoomBroadcast from './routes/createRoomBroadcast';
+import CreateBroadcast from './routes/createBroadcast';
+import JoinBroadcast from './routes/joinBroadcast';
 
 // Main function of the application
 // Routes of different pages of the app are mentioned
@@ -24,6 +26,8 @@ function App() {
           <Route path="/createRoomGroup" component={CreateRoomGroup} />
           <Route path="/roomGroup/:roomGroupID" component={RoomGroup} />
           <Route path="/createRoomBroadcast" component={CreateRoomBroadcast} />
+          <Route path="/createBroadcast" component={CreateBroadcast} />
+          <Route path="/joinBroadcast" component={JoinBroadcast} />
         </Switch>
       </BrowserRouter>
     </div>    

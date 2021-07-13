@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+
 .box {
     justify-content: center;
     align-items: center;
@@ -10,7 +12,7 @@
     margin-top: 5rem;
     background: rgb(19, 37, 64, 0.8);
     border-radius: 30px;
-}
+} 
 #video-box {
     display: inline-flex;
     align-items: center;
@@ -71,6 +73,20 @@
     margin-right: 1rem;
 }
 #ss:hover {
+    color: #f6f6f6;
+    background-color: #787cd1;
+    border: none;
+}
+#stop-s{
+    color: #f6f6f6;
+    background-color: #302b70;
+    border: none;
+    font-size: large;
+    padding: 1rem;
+    border-radius: 100%;
+    margin-right: 1rem;
+}
+#stop-s:hover {
     color: #f6f6f6;
     background-color: #787cd1;
     border: none;

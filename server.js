@@ -8,6 +8,10 @@ const socket = require("socket.io");
 const io = socket(server);
 const path = require("path");
 
+const bodyParser = require('body-parser');
+const webrtc = require('wrtc');
+let senderStream;
+
 /* ------ CREATING AND JOINING ROOMS FOR CONNECTION BETWEEN USERS ------ */
 
 // room object to store the created room IDs
@@ -105,6 +109,56 @@ io.on("connection", socket => {
         socket.broadcast.emit('user left', socket.id);
     });
 });
+
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// accepting the broadcast offer and sending it back to the node server
+app.post("/consumer", async ({ body }, res) => {
+    const peer = new webrtc.RTCPeerConnection({
+        iceServers: [
+            { urls: 'stun:stun.l.google.com:19302' }
+        ]
+    });
+    const desc = new webrtc.RTCSessionDescription(body.sdp);
+    await peer.setRemoteDescription(desc);
+    senderStream.getTracks().forEach(track => peer.addTrack(track, senderStream));
+    const answer = await peer.createAnswer();
+    await peer.setLocalDescription(answer);
+    const payload = {
+        sdp: peer.localDescription
+    }
+
+    res.json(payload);
+});
+
+// implementing broadcast
+app.post('/broadcast', async ({ body }, res) => {
+
+    // creating a peer connection only once
+    const peer = new webrtc.RTCPeerConnection({
+        iceServers: [
+            { urls: 'stun:stun.l.google.com:19302' }
+        ]
+    });
+
+    // recieving the offer and sending our own description
+    peer.ontrack = (e) => handleTrackEvent(e, peer);
+    const desc = new webrtc.RTCSessionDescription(body.sdp);
+    await peer.setRemoteDescription(desc);
+    const answer = await peer.createAnswer();
+    await peer.setLocalDescription(answer);
+    const payload = {
+        sdp: peer.localDescription
+    }
+
+    res.json(payload);
+});
+
+function handleTrackEvent(e, peer) {
+    senderStream = e.streams[0];
+}
 
 if (process.env.PROD) {
     app.use(express.static(path.join(__dirname, './client/build')));

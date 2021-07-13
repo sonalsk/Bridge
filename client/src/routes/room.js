@@ -27,6 +27,8 @@ const Room = (props) => {
             userVideo.current.srcObject = stream;
             userStream.current = stream;
             localStream = stream;
+
+            document.getElementById('stop-s').style.display = 'none';
             
             // grabbing the room id from the url and then sending it to the socket io server
             socketRef.current = io.connect("/");
@@ -221,7 +223,7 @@ const Room = (props) => {
     // Hanging up the call
     function hangUp() {
         userStream.current.getVideoTracks()[0].enabled = false;
-        window.location.replace("/");
+        window.location.replace("/CreateRoom");
     }
 
     // Sharing the Screen
@@ -233,13 +235,25 @@ const Room = (props) => {
             // finding the track which has a type "video", and then replacing it with the current track which is playing
             document.getElementById('ss').style.backgroundColor = '#bc1823';
             senders.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
+            
+            document.getElementById('ss').style.display = 'none';
+            document.getElementById('stop-s').style.backgroundColor = '#bc1823';
+            document.getElementById('stop-s').style.display = 'inline';
 
             // when the screenshare is turned off, replace the displayed screen with the video of the user
             screenTrack.onended = function() {
                 senders.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
                 document.getElementById('ss').style.backgroundColor = '#302b70';
             }
-        })
+        });
+    }
+
+    // stopping screen share
+    function stopShare() {
+        senders.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
+        document.getElementById('stop-s').style.display = 'none';
+        document.getElementById('ss').style.display = 'inline';
+        document.getElementById('ss').style.backgroundColor = '#302b70';
     }
 
     // Copy the Url
@@ -291,8 +305,8 @@ const Room = (props) => {
             <div class="row">
                 <div class="col-12 col-md-9">
                     <div id = "video-box">
-                        <video className="oneVideo" muted autoPlay ref = {userVideo} />
-                        <video className="oneVideo" autoPlay ref = {partnerVideo} />
+                        <video id="user" className="oneVideo" muted autoPlay ref = {userVideo} />
+                        <video id="peer" className="oneVideo" autoPlay ref = {partnerVideo} />
                     </div>
                 
                     <div id ="button-box">
@@ -301,6 +315,7 @@ const Room = (props) => {
                         <button id="end" onClick = {hangUp}> <i class="fas fa-phone-square-alt fa-3x"></i> </button>
                         <button id="avv" onClick = {toggleVideo}> <i class="fas fa-video"></i> </button>
                         <button id="ss" onClick = {shareScreen}> <i class="fas fa-external-link-alt"></i> </button>
+                        <button id="stop-s" onClick = {stopShare} > <i class="far fa-stop-circle"></i> </button>
                     </div>
                 </div>
 

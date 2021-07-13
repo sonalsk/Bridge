@@ -3,7 +3,7 @@
     justify-content: center;
 }
 
-video {
+.groupVideo {
     width: 25vw;
     height: 15vw;
     margin: 2rem;

@@ -16,7 +16,7 @@ const Video = (props) => {
     }, []);
 
     return (
-        <video playsInline autoPlay ref={ref} />
+        <video class="groupVideo" playsInline autoPlay ref={ref} />
     )
 }
 
@@ -167,17 +167,17 @@ const RoomGroup = (props) => {
     // Hanging up the call
     function hangUp() {
         userStream.current.getVideoTracks()[0].enabled = false;
-        window.location.replace("/");
+        window.location.replace("/CreateRoomGroup");
     }
 
     return (
         <div class="row group-call">
             <div col="col-12">
                 <div class="videos">
-                    <video muted ref={userVideo} autoPlay playsInline />
+                    <video class="groupVideo" muted ref={userVideo} autoPlay playsInline />
                     {peers.map((peer) => {
                         return (
-                            <Video key={peer.peerID} peer={peer.peer} />
+                            <Video class="groupVideo" key={peer.peerID} peer={peer.peer} />
                         );
                     })}
                 </div>
