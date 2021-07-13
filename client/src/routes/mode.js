@@ -43,7 +43,7 @@ function Mode() {
                     <div class="row mode-heading">
                         <div className="heading">
                             <h1>Make a Call!</h1>
-                            <p>Connect with your peers in three different ways!</p>
+                            <p>Connect with your peers in four different ways!</p>
                         </div>
                     </div>
 
