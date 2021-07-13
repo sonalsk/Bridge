@@ -28,13 +28,12 @@ const ChatModes = (props) => {
                         <img src={chat} class="d-none d-md-block about-img-cr"></img>
                     </div>
                     <div class="col-md-6 align-self-center welcomeCR">
-                        <h1>One on One and Group</h1>
-                        <h1>Text Chatting with Bridge</h1>
+                        <h1>One on One Text Chat</h1>
+                        <h1>with Bridge</h1>
                         <p>Start a text chat with your peers!</p>
                         
                         <button class="schedule" onClick={() => window.location.replace("/")}> Home </button>
-                        <button class="schedule" onClick = {create}> One To One </button>
-                        <button class="schedule"> Group </button>
+                        <button class="schedule" onClick = {create}> Start Chat </button>
                     </div>
 
                 </div>

@@ -317,6 +317,7 @@ const Room = (props) => {
                         <button id="ss" onClick = {shareScreen}> <i class="fas fa-external-link-alt"></i> </button>
                         <button id="stop-s" onClick = {stopShare} > <i class="far fa-stop-circle"></i> </button>
                     </div>
+
                 </div>
 
                 <div class="col-12 col-md-3 chat">
