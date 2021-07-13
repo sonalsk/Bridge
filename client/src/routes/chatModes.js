@@ -3,22 +3,21 @@ import React from "react";
 import { v1 as uuid } from "uuid";
 import broadcastPage from '../assets/broadcastPage.png';
 import '../css/createRoom.css'
+import chat from '../assets/chatting.png'
 import { Modal } from 'react-bootstrap';
 import emailjs from 'emailjs-com';
 
-// Function to give the user options to start a broadcast event or join the event
+// Function to give the user options to start a text chat
+// Used uuid to create and have unique ID for each room
 
 /* ------ CREATING A ROOM ------ */
-const CreateRoomBroadcast = (props) => {
+const ChatModes = (props) => {
 
     // creating a room id
     // redirecting the user to the correct page
     function create() {
-        props.history.push(`/createBroadcast`);
-    }
-
-    function join() {
-        props.history.push(`/joinBroadcast`);
+        const id = uuid();
+        props.history.push(`/ChatRoomOne/${id}`);
     }
 
     return (
@@ -26,16 +25,16 @@ const CreateRoomBroadcast = (props) => {
             <section id="oo-lp">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src={broadcastPage} class="d-none d-md-block about-img-cr"></img>
+                        <img src={chat} class="d-none d-md-block about-img-cr"></img>
                     </div>
                     <div class="col-md-6 align-self-center welcomeCR">
-                        <h1>One to Many</h1>
-                        <h1>Broadcast with Bridge</h1>
-                        <p>Create a Broadcast Event for your peers!</p>
+                        <h1>One on One and Group</h1>
+                        <h1>Text Chatting with Bridge</h1>
+                        <p>Start a text chat with your peers!</p>
                         
                         <button class="schedule" onClick={() => window.location.replace("/")}> Home </button>
-                        <button class="schedule" onClick = {create}> Start Broadcast </button>
-                        <button class="schedule" onClick = {join}> Join Live </button>
+                        <button class="schedule" onClick = {create}> One To One </button>
+                        <button class="schedule"> Group </button>
                     </div>
 
                 </div>
@@ -45,4 +44,4 @@ const CreateRoomBroadcast = (props) => {
     );
 }
 
-export default CreateRoomBroadcast;
+export default ChatModes;

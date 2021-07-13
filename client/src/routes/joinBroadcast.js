@@ -17,6 +17,7 @@ const JoinBroadcast = (props) => {
     async function init() {
         const peer = createPeer();
         peer.addTransceiver("video", { direction: "recvonly" })
+        peer.addTransceiver("audio", { direction: "recvonly" })
     }
 
     // generating the offer

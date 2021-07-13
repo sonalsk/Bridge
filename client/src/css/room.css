@@ -119,14 +119,14 @@
 .text-box {
     height: 10%;
     background-color: #8d91d8;
-    width: 21.3rem;
+    width: 100%;
     margin-left: 0.1rem;    
 }
 .text {
     margin: 0.5rem;
     margin-top: 0.4rem;
     margin-right: 0.2rem;
-    width: 15rem;
+    width: 70%;
     height: 3rem;
     justify-content: center;
     align-items: center;

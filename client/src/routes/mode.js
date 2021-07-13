@@ -83,7 +83,7 @@ function Mode() {
                                     <Card.Img id='customCardImg' variant="top" src={chat} />
                                     <Card.Body id='customCardText'>
                                         <Card.Title>Chatting</Card.Title>
-                                        <button class="choiceButton" onClick={() => window.location.replace("/CreateRoomBroadcast")}>
+                                        <button class="choiceButton" onClick={() => window.location.replace("/ChatModes")}>
                                             Get Started
                                         </button>
                                     </Card.Body>

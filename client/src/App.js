@@ -10,6 +10,8 @@ import RoomGroup from './routes/roomGroup';
 import CreateRoomBroadcast from './routes/createRoomBroadcast';
 import CreateBroadcast from './routes/createBroadcast';
 import JoinBroadcast from './routes/joinBroadcast';
+import ChatModes from './routes/chatModes';
+import ChatRoomOne from './routes/chatRoomOne';
 
 // Main function of the application
 // Routes of different pages of the app are mentioned
@@ -28,6 +30,8 @@ function App() {
           <Route path="/createRoomBroadcast" component={CreateRoomBroadcast} />
           <Route path="/createBroadcast" component={CreateBroadcast} />
           <Route path="/joinBroadcast" component={JoinBroadcast} />
+          <Route path="/ChatModes" component={ChatModes} />
+          <Route path="/ChatRoomOne/:ChatRoomOneID" component={ChatRoomOne} />
         </Switch>
       </BrowserRouter>
     </div>    
