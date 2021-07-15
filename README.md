@@ -33,7 +33,7 @@ https://bridgevideochat.herokuapp.com/
 https://youtu.be/Eo_fLT7eOHs
 
 ## Project PPT
-https://drive.google.com/file/d/1Lsv_fiyhyqNAqhbhNaVrKA44IjV_WAr1/view?usp=sharing
+https://www.behance.net/gallery/123551417/Bridge-Video-Conferencing-Website
 
 ## Contact
 In case of any suggestions or enquires, feel free to reach out to the contributors.
