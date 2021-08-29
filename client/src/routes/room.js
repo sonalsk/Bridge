@@ -91,8 +91,8 @@ const Room = (props) => {
                 { urls: 'stun:stun4.l.google.com:19302' },
                 {
                     urls: 'turn:numb.viagenie.ca',
-                    credential: 'spider23',
-                    username: 'sonalkushwaha039@gmail.com'
+                    credential: '',
+                    username: ''
                 },
             ]
         });
