@@ -30,7 +30,7 @@ Bridge is a web based video conferencing application which bridges the gap betwe
 https://bridgevideochat.herokuapp.com/
 
 ## Project Video
-https://youtu.be/Eo_fLT7eOHs
+https://youtu.be/Z-1__7TO2js
 
 ## Project PPT
 https://www.behance.net/gallery/123551417/Bridge-Video-Conferencing-Website
