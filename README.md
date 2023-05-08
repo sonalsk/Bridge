@@ -26,9 +26,13 @@ Bridge is a web based video conferencing application which bridges the gap betwe
 
 ![modes](https://user-images.githubusercontent.com/51206050/125435574-63a2507d-f41b-4c68-9a23-343f5b31dd7c.png)
 
-## To set-up and run
+## To set-up
 1. Create Turn Server via numb.viagenie
 2. Add credentials to room.js
+
+## To run locally
+1. Root folder - node server.js
+2. client folder - yarn start
 
 ## Project Link
 https://bridgevideochat.herokuapp.com/
